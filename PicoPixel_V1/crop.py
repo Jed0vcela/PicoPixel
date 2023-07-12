@@ -1,5 +1,6 @@
 import starquake
 
+
 def crop(bitmap, x, y, width=32, height=8):
     temp = bitmap[y:y+height]
     return [line[x:x+width] for line in temp]
