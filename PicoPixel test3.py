@@ -98,7 +98,7 @@ cols3= [
     "                                ",
     "                 %              ",
     "                        %%      ",
-    
+
     ]
 
 cols4= [
@@ -110,25 +110,30 @@ cols4= [
 "11000000000000011100001001111111",
 "11110001111111000001111110001000",
 "10000111111111111111111111111111",
-    
-    
+
+
     ]
+
+
 def seg_print(segment): #print one segment - a,b,c,d,e,f,g,dp
     vals = chars[segment]
     for segment_number in range(0, 8):
         segment_pins[segment_number].value(vals[segment_number])
-        
+
+
 def seg_print_letter(letter):
     vals = letters[letter]
     for segment_number in range(0, 8):
         segment_pins[segment_number].value(vals[segment_number])
+
 
 def matrix_latch(): #"obnoví" obraz
     cols_latch.value(1)
     cols_latch.value(0)
     rows_latch.value(1)
     rows_latch.value(0)
-        
+
+
 def matrix_clear(): #nastaví všechny body matrixu na 0
     for col in range (0, 32):
         cols_data.value(1)
@@ -139,7 +144,8 @@ def matrix_clear(): #nastaví všechny body matrixu na 0
         rows_clock.value(0)
         rows_clock.value(1)
     matrix_latch()
-    
+
+
 def matrix_write(data):
     cols_data.value(0)
     cols_clock.value(1)
@@ -156,6 +162,7 @@ def matrix_write(data):
         #utime.sleep(0.1)
     matrix_clear()
 
+
 def matrix_write1(data):
     cols_data.value(0)
     cols_clock.value(1)
@@ -171,23 +178,24 @@ def matrix_write1(data):
         matrix_latch()
         #utime.sleep(0.1)
     matrix_clear()
-    
+
+
 def matrix_push_col():
     cols_data.value(1)
     cols_clock.value(1)
     cols_clock.value(0)
     matrix_latch()
-    
+
 def matrix_push_row():
     rows_data.value(0)
     rows_clock.value(1)
     rows_clock.value(0)
     matrix_latch()
-     
 
-    
+
+
 while True:
-   
+
     c1.value(1)
     c2.value(0)
     c3.value(0)
@@ -212,13 +220,10 @@ while True:
     c4.value(1)
     seg_print("a")
     utime.sleep(sleep)
-    
-    
-    
+
     while button6.value():
-        #relay.freq(8)
-        #relay.duty_u16(30000)
-        
+        # relay.freq(8)
+        # relay.duty_u16(30000)
 
         for x in range (0, 1):
             cols_data.value(0)
@@ -226,7 +231,7 @@ while True:
             cols_clock.value(0)
             cols_latch.value(1)
             cols_latch.value(0)
-        
+
 
         for x in range (0, 1):
             rows_data.value(1)
@@ -234,34 +239,34 @@ while True:
             rows_clock.value(1)
             rows_latch.value(1)
             rows_latch.value(0)
-        
+
         utime.sleep(0.1)
-        
+
     if not button6.value():
         relay.duty_u16(0)
-        
+
     if button2.value():
-        #relay.freq(70)
-        #relay.duty_u16(30000)
+        # relay.freq(70)
+        # relay.duty_u16(30000)
         matrix_clear()
-        #utime.sleep(0.1)
-        
+        # utime.sleep(0.1)
+
     if button4.value():
-        #relay.freq(70)
-        #relay.duty_u16(30000)
-        #matrix_push_col()
+        # relay.freq(70)
+        # relay.duty_u16(30000)
+        # matrix_push_col()
         matrix_write1(cols4)
-        #utime.sleep(0.1)
-        
+        # utime.sleep(0.1)
+
     if button5.value():
-        #relay.freq(70)
-        #relay.duty_u16(30000)
+        # relay.freq(70)
+        # relay.duty_u16(30000)
         matrix_push_row()
         utime.sleep(0.1)
-        
+
     if button1.value():
         matrix_write(cols1)
-        #utime.sleep(0.1)
+        # utime.sleep(0.1)
     if button3.value():
         matrix_write(cols2)
 
