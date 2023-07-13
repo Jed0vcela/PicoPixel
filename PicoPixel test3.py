@@ -135,11 +135,11 @@ def matrix_latch(): #"obnoví" obraz
 
 
 def matrix_clear(): #nastaví všechny body matrixu na 0
-    for col in range (0, 32):
+    for col in range(0, 32):
         cols_data.value(1)
         cols_clock.value(1)
         cols_clock.value(0)
-    for row in range (0, 8):
+    for row in range(0, 8):
         rows_data.value(0)
         rows_clock.value(0)
         rows_clock.value(1)
@@ -150,8 +150,8 @@ def matrix_write(data):
     cols_data.value(0)
     cols_clock.value(1)
     cols_data.value(1)
-    for x in range (0, 32, 1):
-        for y in range (7, -1, -1): #iteruje od 7mi k nule
+    for x in range(0, 32, 1):
+        for y in range(7, -1, -1): # iteruje od 7mi k nule
             vals = (data)[y]
             rows_data.value(vals[x])
             rows_clock.value(0)
@@ -159,7 +159,7 @@ def matrix_write(data):
         cols_clock.value(1)
         cols_clock.value(0)
         matrix_latch()
-        #utime.sleep(0.1)
+        # utime.sleep(0.1)
     matrix_clear()
 
 
@@ -167,8 +167,8 @@ def matrix_write1(data):
     cols_data.value(0)
     cols_clock.value(1)
     cols_data.value(1)
-    for x in range (0, 32, 1):
-        for y in range (7, -1, -1): #iteruje od 7mi k nule
+    for x in range(0, 32, 1):
+        for y in range(7, -1, -1): # iteruje od 7mi k nule
             vals = (data)[y]
             rows_data.value(1 if vals[x]!=" "and vals[x]!="0"else 0)
             rows_clock.value(0)
@@ -176,7 +176,7 @@ def matrix_write1(data):
         cols_clock.value(1)
         cols_clock.value(0)
         matrix_latch()
-        #utime.sleep(0.1)
+        # utime.sleep(0.1)
     matrix_clear()
 
 
@@ -185,6 +185,7 @@ def matrix_push_col():
     cols_clock.value(1)
     cols_clock.value(0)
     matrix_latch()
+
 
 def matrix_push_row():
     rows_data.value(0)
@@ -225,7 +226,7 @@ while True:
         # relay.freq(8)
         # relay.duty_u16(30000)
 
-        for x in range (0, 1):
+        for x in range(0, 1):
             cols_data.value(0)
             cols_clock.value(1)
             cols_clock.value(0)
@@ -233,7 +234,7 @@ while True:
             cols_latch.value(0)
 
 
-        for x in range (0, 1):
+        for x in range(0, 1):
             rows_data.value(1)
             rows_clock.value(0)
             rows_clock.value(1)
